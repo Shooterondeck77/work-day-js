@@ -22,7 +22,26 @@ function timeKeeper () {
 var timeNow = moment().hour();
 
 }
+$(".time-stop").each (function () {
+    var blockTime = parseInt ($(this).attr("id").split("hour")[1]);
+// We take the current time and add the classes for the color indicator"
+    if (blockTime < timeNow) {
+        $(this).removeClass ("future");
+        $(this).removeClass ("present");
+        $(this).addClass ("past");
+    }
+    else if(blockTime === timeNow) {
+        $(this).removeClass ("future");
+        $(this).removeClass ("past");
+        $(this).addClass ("present");
+    }
+    else {
+        $(this).removeClass ("present");
+        $(this).removeClass ("past");
+        $(this).addClass ("future");
+    }
 
+})
 
     // TODO: Add code to apply the past, present, or future class to each time
     // block by comparing the id to the current hour. HINTS: How can the id
