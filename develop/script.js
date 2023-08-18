@@ -1,7 +1,6 @@
 // Display current time and date
-const date = new Date();
- console.log(date);
- var current = document.querySelector(".date")
+var todayDate = moment().format('dddd, MMM Do YYYY');
+$("#currentDay").html(todayDate);
 
 
 $(document).ready(function () {
