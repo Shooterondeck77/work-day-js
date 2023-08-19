@@ -1,23 +1,16 @@
 // Display current time and date
 
-$(document).ready(function() {
-    var todayDate = moment().format('dddd, MMM Do YYYY');
+function displayTime(){
+    var dateObject = dayjs();
+    var todayDate = dateObject.format('MMM DD, YYYY [at] hh:mm:ss a');
     $("#currentDay").html(todayDate);
-  });
+    var todayDate = parseInt(dateObject.format('HH'));
+    timeTracker(todayDate);
+}
 
-$(document).ready(function () {
-    // SaveButton click listener 
-        $('saveButton').click(function() {
-            var text = $(this).siblings(".description").val();
-            var time = $(this).parent().attr("id");
-        localStorage.setItem(time, text);
-        });
-      
-    
-function timeTracker () {
-    var currentHour = dayjs().format();
+function timeTracker(timeNow) {
 
-$(".time-stop").each (function () {
+$(".time-block").each(function () {
     var blockTime = parseInt ($(this).attr("id").split("-")[1]);
 // We take the current time and add the classes for the color indicator"
     if (blockTime < timeNow) {
@@ -35,20 +28,32 @@ $(".time-stop").each (function () {
         $(this).removeClass ("past");
         $(this).addClass ("future");
     }
-
 })
 }
+
+$(document).ready(function () {
+
+    displayTime();
+    setInterval(displayTime, 1000);
+
+
+    // SaveButton click listener 
+        $('.saveBtn').click(function() {
+            var text = $(this).siblings(".description").val();
+            var time = $(this).parent().attr("id");
+        localStorage.setItem(time, text);
+        console.log(localStorage.getItem(time))
+        });
+      
     // Any user input that was saved in localStorage
-    $("#hour9.description").val(localStorage.getItem("hour9"));
-    $("#hour10.description").val(localStorage.getItem("hour10"));
-    $("#hour11.description").val(localStorage.getItem("hour11"));
-    $("#hour12.description").val(localStorage.getItem("hour12"));
-    $("#hour13.description").val(localStorage.getItem("hour13"));
-    $("#hour14.description").val(localStorage.getItem("hour14"));
-    $("#hour15.description").val(localStorage.getItem("hour15"));
-    $("#hour16.description").val(localStorage.getItem("hour16"));
-    $("#hour17.description").val(localStorage.getItem("hour17"));
-    
-    timeTracker ();
+    $("#hour-9.description").val(localStorage.getItem("hour-9"));
+    $("#hour-10.description").val(localStorage.getItem("hour-10"));
+    $("#hour-11.description").val(localStorage.getItem("hour-11"));
+    $("#hour-12.description").val(localStorage.getItem("hour-12"));
+    $("#hour-13.description").val(localStorage.getItem("hour-13"));
+    $("#hour-14.description").val(localStorage.getItem("hour-14"));
+    $("#hour-15.description").val(localStorage.getItem("hour-15"));
+    $("#hour-16.description").val(localStorage.getItem("hour-16"));
+    $("#hour-17.description").val(localStorage.getItem("hour-17"));
   })
   
